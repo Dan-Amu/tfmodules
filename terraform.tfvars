@@ -1,0 +1,16 @@
+name                   = "bla"
+lokasjon               = "Norway East"
+RG_name                = "LB-test"
+sshkey_name            = "id_azure1"
+sshkey_path            = "C:/Users/dan/.ssh/id_azure1.pub"
+network_name           = "network-1"
+network_address_space  = ["192.168.0.0/16"]
+subnet_name            = ["subnet1"]
+subnet_address_space   = ["192.168.1.0/24", "192.168.2.0/24"]
+nic_name               = ["nic1", "nic2"]
+vm_public_ips          = ["VM1IP", "VM2IP"]
+lb_public_ips          = "LB1IP"
+vm_names               = ["VM-1", "VM-2"]
+vm_type                = "Standard_B1s"
+admin_user             = "dan"
+lb_name                = "BalanceMyLoad"

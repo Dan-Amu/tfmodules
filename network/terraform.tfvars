@@ -1,0 +1,10 @@
+name                   = "bla"
+lokasjon               = "Norway East"
+RG_name                = "LB-test"
+network_name           = "network-1"
+network_address_space  = ["192.168.0.0/16"]
+subnet_name            = ["subnet1"]
+subnet_address_space   = ["192.168.1.0/24", "192.168.2.0/24"]
+nic_name               = ["nic1", "nic2"]
+vm_public_ips          = ["VM1IP", "VM2IP"]
+lb_public_ips          = "LB1IP"
