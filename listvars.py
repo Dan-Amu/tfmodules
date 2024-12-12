@@ -41,23 +41,45 @@ for lines in file:
         resourceList.append(r)
         resourceIndex = resourceIndex + 1 
 
-    if "var." in lines:
+    if "var." in lines or "module." in lines:
         match2 = re.search("\\((.*?)\\)", lines)
         if match2 != None:
             r2 = match2.group(1)
             r2 = r2.replace("(", "")
             r2 = r2.replace(")", "")
         else:
-            match4 = re.search("= (.*)", lines)
-            r2 = match4.group(1)
-            #r2 = lines+"else"
+            #print(lines+" TEST")
+            if "=" in lines:
+                match4 = re.search("= (.*)", lines)
+                r2 = match4.group(1)
+            else:
+                r2 = lines
 
-        match3 = re.search("(var.*)\\[.*", lines)
+        #match3 = re.search("(var.*)\\[.*", lines)       --old regex
+        match3 = re.search("(var.*)\\[.*|(module.*)\\[.*", lines)
         if match3 != None:
-            r2 = match3.group(1)
+            if match3.group(1) is None:
+                r2 = match3.group(2)
+            else:
+                r2 = match3.group(1)
+
         variablesList[0].append(resourceIndex)
         variablesList[1].append(r2)
         
 file.close()
-for i in range(len(variablesList[0])):
-    print(variablesList[0][i], variablesList[1][i])
+
+lastPrintedTitle = 0
+isTitlePrinted = False
+for i in range(len(variablesList[1])):
+    titleIndex = variablesList[0][i]-1
+
+    if lastPrintedTitle != titleIndex:
+        isTitlePrinted = False
+
+    if not isTitlePrinted: 
+        lastPrintedTitle = titleIndex
+        isTitlePrinted = True
+        print("\n"+resourceList[titleIndex])
+
+    print("   -"+str(variablesList[1][i]))
+print("\n")
