@@ -17,8 +17,10 @@ except:
     print("variables.tf doesn't exist")
 
     exit()
+
 variableList = []
 defaultList = []
+
 for lines in file:
     if "variable" in lines:
         # regex "(.*?)" captures anything between two quotes
@@ -28,9 +30,10 @@ for lines in file:
         r = match.group()
         r = r.replace("\"", "")
         variableList.append(r)
+        defaultList.append(None)
     if "default" in lines:
         default = lines[lines.index("="):]
-        defaultList.append(default)
+        defaultList[-1] = default
 file.close()
 
 if os.path.isfile("terraform.tfvars"):
@@ -44,11 +47,11 @@ if os.path.isfile("terraform.tfvars"):
         exit()
     
 length = getLengthOfLongestStringInList(variableList)
-
+#print("varList:", len(variableList), " defList:", len(defaultList))
 file2 = open("terraform.tfvars", "w")
 for num in range(0, len(variableList)):
     spacing = " "*(2+length - len(variableList[num]))
-
-    file2.write(variableList[num]+spacing+defaultList[num])
+    if defaultList[num] != None:
+        file2.write(variableList[num]+spacing+defaultList[num])
 
 file2.close()

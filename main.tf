@@ -23,6 +23,7 @@ resource "azurerm_resource_group" "example" {
 
 module "network" {
   source = "./network"
+  test_var = "1"
 }
 /*
 module "VM" {

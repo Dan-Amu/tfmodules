@@ -58,3 +58,6 @@ variable "lb_public_ips" {
   type           = string
   default        = "LB1IP"
 }
+
+variable "test_var" {
+}
